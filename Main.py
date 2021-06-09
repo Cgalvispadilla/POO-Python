@@ -1,5 +1,7 @@
 from operator import itemgetter, attrgetter, methodcaller
+#se importa el modulo de vehiculo
 from Vehiculo import *
+#se importa el modulo de las funciones
 from funciones import *
         
 listVehiculo = []
@@ -23,13 +25,14 @@ while not salir:
         m = input('Ingrese la placa del vehiculo: ')
         enc = validarVehiculo(m, listVehiculo)
         if enc == True:
-            print("Ya esta el vehiculo pana, intenta con otro ;)")
+            print("Ya esta el vehiculo, intenta con otro ;)")
         else:
             mar = input('Ingrese la marca del vehiculo: ')
             mo = input('Ingrese el modelo del vehiculo: ')
             pre = float(input('Ingrese el precio del vehiculo: '))
             est = input('Ingrese el estado del vehiculo (vendido o disponible): ')
             if est == "vendido":
+                #objeto de la clase vehiculo
                 miVehiculo = Vehiculo(m, mar, mo, pre, True)
                 listVehiculo.append(miVehiculo)
             elif est == "disponible":
@@ -39,9 +42,10 @@ while not salir:
                 print("error, debes poner vendido o disponible ;)")
 
     elif opcion == 2:
-        #print("Matricula: "+listVehiculo[0].getMatricula()+"Estado: "+str(listVehiculo[0].getEstado()))
         for i in listVehiculo:
             print("matricula",i.getMatricula(), "modelo", i.getModelo(), "precio", i.getPrecio())
+        else:
+            print('no hay vehiculos aún')
     elif opcion == 3:
         pla = input('Ingrese la placa del vehiculo que desea buscar:')
         sol = buscarVehiculoPlaca(pla, listVehiculo)
@@ -53,11 +57,15 @@ while not salir:
         ordenar("Precio",listVehiculo)
         for i in listVehiculo:
             print("matricula",i.getMatricula(), "modelo", i.getModelo(), "precio", i.getPrecio())
+        else: 
+            print('el auto no existe en el concesionario')
     elif opcion == 5:
         ordenar("Marca",listVehiculo)
         for i in listVehiculo:
             print("matricula",i.getMatricula(), "modelo", i.getModelo(), "precio", i.getPrecio())
+        else: 
+            print('el auto no existe en el concesionario')    
     elif opcion == 6:
         salir = True
     else:
-        print("Introduce un numero entre 1 y 3")
+        print("Introduce un numero entre 1 y 6")

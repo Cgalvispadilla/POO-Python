@@ -1,8 +1,6 @@
 # se importan el modulo operator para usar el methodcaller
 from operator import itemgetter, attrgetter, methodcaller
-# metodo para pedir el numero en el menu
-
-
+# función para pedir el numero en el menu
 def pedirNumeroEntero():
     correcto = False
     num = 0
@@ -16,14 +14,12 @@ def pedirNumeroEntero():
     return num
 
 # metodo para validar si existe o no un vehiculo ya agregado
-
-
 def validarVehiculo(placa, listVehiculo):
-    est = False
+    existe = False
     for i in listVehiculo:
         if i.getMatricula() == placa:
-            est = True
-    return est
+            existe = True
+    return existe
 
 # Este metodo solo funciona para realizar busquedas en listas sencillas o de algun tipo primitivo de dato
 # No usarse en listas complejas porque no funciona
@@ -76,7 +72,6 @@ def ordenar(dato, listVehiculo):
     if(dato == "precio" or dato == "Precio"):
         # sorted(listVehiculo, key=itemgetter(0))
         listVehiculo.sort(key=methodcaller('getPrecio'), reverse=True)
-        # sorted(listVehiculo, )
         # sorted(listVehiculo, key=lambda vehiculo: vehiculo.matricula)
     elif dato == "Marca" or dato == "marca":
         listVehiculo.sort(key=methodcaller('getMarca'), reverse=True)
