@@ -18,11 +18,11 @@ def pasar_vehiculos_lista():
             with open("vehiculos.txt",'r', encoding="utf8") as archivo:
                 for pelicula in archivo:
                     dividir= pelicula.split(" ")
-                    matricula=dividir[1]
-                    marca=dividir[2]
-                    modelo=dividir[3]
-                    precio=dividir[4]
-                    estado=dividir[5]
+                    matricula=dividir[0]
+                    marca=dividir[1]
+                    modelo=dividir[2]
+                    precio=dividir[3]
+                    estado=dividir[4]
                     unVehiculo= Vehiculo(matricula, marca, modelo, precio,estado)
                     listVehiculo.append(unVehiculo)
         except Exception as e:
@@ -71,8 +71,9 @@ while not salir:
                 print("error, debes poner vendido o disponible ;)")
 
     elif opcion == 2:
-        for i in listVehiculo:
-            print("matricula",i.getMatricula(), "modelo", i.getModelo(), "precio", i.getPrecio())
+        if listVehiculo:
+            for i in listVehiculo:
+                print("matricula",i.getMatricula(), "modelo", i.getModelo(), "precio", i.getPrecio())
         else:
             print('no hay vehiculos aún')
     elif opcion == 3:
