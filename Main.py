@@ -1,13 +1,40 @@
 from operator import itemgetter, attrgetter, methodcaller
+from os import umask
 #se importa el modulo de vehiculo
 from Vehiculo import *
 #se importa el modulo de las funciones
 from funciones import *
-        
+
+def agregar_vehiculo(Vehiculo):
+    try:
+        with open("vehiculos.txt",'a', encoding="utf8") as archivo:
+            archivo.write(Vehiculo.getMatricula()+" "+Vehiculo.getMarca()+" "+Vehiculo.getModelo()+" "+str(Vehiculo.getPrecio())+" "+str(Vehiculo.getEstado())+" \n")
+    except Exception as e:
+            print(e)   
+
+def pasar_vehiculos_lista():
+        unVehiculo: Vehiculo
+        try:
+            with open("vehiculos.txt",'r', encoding="utf8") as archivo:
+                for pelicula in archivo:
+                    dividir= pelicula.split(" ")
+                    matricula=dividir[1]
+                    marca=dividir[2]
+                    modelo=dividir[3]
+                    precio=dividir[4]
+                    estado=dividir[5]
+                    unVehiculo= Vehiculo(matricula, marca, modelo, precio,estado)
+                    listVehiculo.append(unVehiculo)
+        except Exception as e:
+            print(e)            
+            
 listVehiculo = []
+pasar_vehiculos_lista()
+print(listVehiculo)
 salir = False
 opcion = 0
 sol = None
+
 while not salir:
     
     print("1. Agregar Vehiculo")
@@ -34,10 +61,12 @@ while not salir:
             if est == "vendido":
                 #objeto de la clase vehiculo
                 miVehiculo = Vehiculo(m, mar, mo, pre, True)
+                agregar_vehiculo(miVehiculo)
                 listVehiculo.append(miVehiculo)
             elif est == "disponible":
                 miVehiculo = Vehiculo(m, mar, mo, pre, False)
                 listVehiculo.append(miVehiculo)
+                agregar_vehiculo(miVehiculo)
             else:
                 print("error, debes poner vendido o disponible ;)")
 
